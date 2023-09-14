@@ -132,12 +132,14 @@ for COMMAND in "${COMMANDS[@]}"; do
     alias ".${COMMAND}=$(which ${COMMAND})"
 done
 
+alias ga="git add *"
+alias gc="git commit"
+alias gp="git push"
+
 alias python=python3
+alias pip=pip3
 alias ssh='env TERM=xterm-256color ssh'
-alias c='cd ~/research/CCBS-ES'
 alias t='tmux'
 alias n='nv .'
 alias m='make -j'
 alias cls='clear'
-alias p='cd ~/research/paper'
-alias clearDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
