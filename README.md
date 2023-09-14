@@ -1,9 +1,10 @@
 # dot_files
 nvim, tmux and initrc file
 
-install neovim using on linux 
+install neovim and lua using on linux 
 ```
 sudo apt get neovim
+sudo apt install lua5.3
 ```
 or
 ```
