@@ -7,6 +7,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "10j")
 vim.keymap.set("n", "K", "10k")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -63,3 +64,20 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+
+vim.api.nvim_create_user_command('W',function()
+    vim.cmd("w")
+end,{})
+
+vim.api.nvim_create_user_command('Q',function()
+    vim.cmd("q")
+end,{})
+
+vim.api.nvim_create_user_command('Wq',function()
+    vim.cmd("wq")
+end,{})
+
+
+vim.api.nvim_create_user_command('WQ',function()
+    vim.cmd("wq")
+end,{})
