@@ -16,5 +16,5 @@ copy .zshrc with care, only alias are useful mainly
 ```
 mv dot_files/.zshrc ~/
 mkdir .config
-cp -r dot_files/nvim ~/config
+cp -r dot_files/nvim ~/.config
 ```
