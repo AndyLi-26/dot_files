@@ -1,29 +1,27 @@
+--local lsp = require("lsp-zero")
 local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-  'tsserver',
-  'rust_analyzer',
-})
-
 -- Fix Undefined global 'vim'
-lsp.nvim_workspace()
+-- lsp.nvim_workspace()
 
+-- require'lspconfig'.eslint.setup{}
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
+-- local cmp_mappings = lsp.defaults.cmp_mappings({
+cmp.setup({
   ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+  ['<Tab>'] = cmp.config.disable,
+  ['<Enter>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
+-- lsp.setup_nvim_cmp({
+--   mapping = cmp_mappings
+-- })
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -50,7 +48,9 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+
 lsp.setup()
+lsp.setup_servers({'ts_ls', 'rust_analyzer'})
 
 vim.diagnostic.config({
     virtual_text = true
