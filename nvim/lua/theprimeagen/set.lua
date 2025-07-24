@@ -22,7 +22,8 @@ vim.opt.incsearch = true
 
 vim.o.foldenable=true
 vim.o.foldmethod='indent'
-vim.o.foldlevel=1
+--vim.o.foldmethod='syntax'
+vim.o.foldlevel=0
 vim.opt.foldnestmax=1
 
 vim.opt.termguicolors = true
@@ -33,6 +34,7 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "80"
+--vim.opt.colorcolumn = "80"
 vim.opt.swapfile = false
 vim.opt.clipboard="unnamed"
+vim.opt.autoread = true

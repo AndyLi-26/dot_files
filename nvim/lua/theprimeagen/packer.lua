@@ -8,17 +8,21 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.3',
 	  -- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
   use({
-	  'rose-pine/neovim',
-	  as = 'rose-pine',
-	  config = function()
-		  vim.cmd('colorscheme rose-pine')
-	  end
+	  --'rose-pine/neovim',
+	  --as = 'rose-pine',
+      'fabius/molokai.nvim',
+      requires={
+          {'rktjmp/lush.nvim'},
+      }
+	  --config = function()
+	  --  vim.cmd('colorscheme rose-pine')
+	  --end
   })
 
   use({
@@ -33,48 +37,86 @@ return require('packer').startup(function(use)
       end
   })
 
+
+  --neogit
   use {
-			'nvim-treesitter/nvim-treesitter',
-			run = function()
-				local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-				ts_update()
-			end,}
-  use("nvim-treesitter/playground")
-  --use("theprimeagen/harpoon")
-  use("theprimeagen/refactoring.nvim")
-  use("mbbill/undotree")
-  use("tpope/vim-fugitive")
-  use("nvim-treesitter/nvim-treesitter-context");
+      "NeogitOrg/neogit",
+      requires={
+          {"nvim-lua/plenary.nvim"},         -- required
+          {"sindrets/diffview.nvim"},        -- optional - Diff integration
 
-  use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-buffer'},
-		  {'hrsh7th/cmp-path'},
-		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'hrsh7th/cmp-nvim-lua'},
-
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},
-		  {'rafamadriz/friendly-snippets'},
-	  }
+          -- Only one of these is needed, not both.
+          {"nvim-telescope/telescope.nvim"}, -- optional
+          --"ibhagwan/fzf-lua",              -- optional
+      },
+      branch='nightly',
+      --keys = { {"n", "<leader>gn", function() require('neogit').open() end, "Neogit" } },
+      --opts = { graph_style = "unicode", }
   }
 
-  use("folke/zen-mode.nvim")
-  use("github/copilot.vim")
-  use("eandrju/cellular-automaton.nvim")
-  use("laytan/cloak.nvim")
-  use("preservim/nerdtree")
-  use('christoomey/vim-tmux-navigator')
+  use {
+      'nvim-treesitter/nvim-treesitter',
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,}
+      use("nvim-treesitter/playground")
+      --use("theprimeagen/harpoon")
+      use("theprimeagen/refactoring.nvim")
+      use("mbbill/undotree")
+      use("tpope/vim-fugitive")
+      --use("junegunn/rainbow_parentheses.vim")
+      --use("tpope/vim-fugitive")
+      use("lervag/vimtex")
+      use("nvim-treesitter/nvim-treesitter-context");
 
-end)
+
+      use("folke/zen-mode.nvim")
+      use("github/copilot.vim")
+      use("eandrju/cellular-automaton.nvim")
+      use("laytan/cloak.nvim")
+      use("preservim/nerdtree")
+      use('christoomey/vim-tmux-navigator')
+      --use {
+      --    "lukas-reineke/indent-blankline.nvim",
+      --    config = function()
+      --        opts = {}
+      --        -- Other blankline configuration here
+      --        require("ibl").setup(require("indent-rainbowline").make_opts(opts,{
+      --            -- How transparent should the rainbow colors be. 1 is completely opaque, 0 is invisible. 0.07 by default
+      --            color_transparency = 0.35,
+      --            -- The 24-bit colors to mix with the background. Specified in hex.
+      --            -- { 0xffff40, 0x79ff79, 0xff79ff, 0x4fecec, } by default
+      --            colors = { 0xff0000, 0x00ff00, 0x0000ff, },
+      --        }))
+      --    end,
+      --    requires = {
+      --        "TheGLander/indent-rainbowline.nvim",
+      --    },
+      --}
+      --
+      use {
+          'VonHeikemen/lsp-zero.nvim',
+          branch = 'v1.x',
+          requires = {
+              -- LSP Support
+              {'neovim/nvim-lspconfig'},
+              {'williamboman/mason.nvim'},
+              {'williamboman/mason-lspconfig.nvim'},
+
+              -- Autocompletion
+              {'hrsh7th/nvim-cmp'},
+              {'hrsh7th/cmp-buffer'},
+              {'hrsh7th/cmp-path'},
+              {'saadparwaiz1/cmp_luasnip'},
+              {'hrsh7th/cmp-nvim-lsp'},
+              {'hrsh7th/cmp-nvim-lua'},
+
+              -- Snippets
+              {'L3MON4D3/LuaSnip'},
+              {'rafamadriz/friendly-snippets'},
+          }
+      }
+
+  end)
 

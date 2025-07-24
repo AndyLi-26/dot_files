@@ -3,15 +3,20 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
--- Fix Undefined global 'vim'
--- lsp.nvim_workspace()
+lsp.ensure_installed({
+  --'tsserver',
+  'quick_lint_js',
+  'eslint',
+})
 
--- require'lspconfig'.eslint.setup{}
+-- Fix Undefined global 'vim'
+lsp.nvim_workspace()
+
+require'lspconfig'.eslint.setup{}
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
--- local cmp_mappings = lsp.defaults.cmp_mappings({
-cmp.setup({
+local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<Tab>'] = cmp.config.disable,
@@ -19,9 +24,10 @@ cmp.setup({
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
--- lsp.setup_nvim_cmp({
---   mapping = cmp_mappings
--- })
+
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
+})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -49,8 +55,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 
-lsp.setup()
-lsp.setup_servers({'ts_ls', 'rust_analyzer'})
+-- lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true

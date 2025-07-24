@@ -10,6 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export OPENAI_API_KEY=''
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -79,6 +80,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(z zsh-autosuggestions web-search git)
 
+DISABLE_AUTO_UPDATE="true"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -132,14 +134,16 @@ for COMMAND in "${COMMANDS[@]}"; do
     alias ".${COMMAND}=$(which ${COMMAND})"
 done
 
-alias ga="git add *"
-alias gc="git commit"
-alias gp="git push"
-
 alias python=python3
-alias pip=pip3
 alias ssh='env TERM=xterm-256color ssh'
+alias c='cd ~/research/CCBS-ES'
+alias c.='cd ../'
+alias c..='cd ../../'
+alias c...='cd ../../../'
 alias t='tmux'
+alias ta='tmux a -t'
 alias n='nv .'
 alias m='make -j'
-alias cls='clear'
+alias cls="clear && printf '\e[3J'"
+alias note="cd ~/NAS/Mac/quick_notes/ && nv"
+alias clearDNS='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
