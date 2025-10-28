@@ -2,6 +2,7 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 vim.keymap.set("n", "<leader>a", ":Git add .<CR>")
 vim.keymap.set("n", "<leader>c", ":Git commit<CR>")
 vim.keymap.set("n", "<leader>p", ":Git push<CR>" )
+vim.keymap.set("n", "<leader>d", ":Gdif<CR>")
 
 local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
 

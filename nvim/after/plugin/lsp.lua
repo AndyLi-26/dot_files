@@ -12,9 +12,15 @@ lsp.ensure_installed({
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
+local cmp = require('cmp')
 require'lspconfig'.eslint.setup{}
 
-local cmp = require('cmp')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+require('lspconfig')['ts_ls'].setup {
+  capabilities = capabilities,
+}
+
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -26,7 +32,13 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+  mapping = cmp_mappings,
+  sources = {
+    { name = 'nvim_lsp', keyword_length = 1 },
+    { name = 'buffer', keyword_length = 1 },
+    { name = 'path', keyword_length = 1 },
+    { name = 'luasnip', keyword_length = 3 },
+  }
 })
 
 lsp.set_preferences({
@@ -55,7 +67,10 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 
--- lsp.setup()
+lsp.setup()
+--vim.lsp.enable('lua')
+--v
+--vim.
 
 vim.diagnostic.config({
     virtual_text = true

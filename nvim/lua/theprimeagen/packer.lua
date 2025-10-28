@@ -118,5 +118,13 @@ return require('packer').startup(function(use)
           }
       }
 
+      use {
+          'stevearc/aerial.nvim',
+          requires = {
+              'nvim-treesitter/nvim-treesitter', -- optional, for better symbols
+              'nvim-tree/nvim-web-devicons'      -- optional, for icons
+          }
+      }
+
   end)
 
