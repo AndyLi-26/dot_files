@@ -1,4 +1,4 @@
- vim.opt.guicursor = { 'i:ver25','i:blinkwait10','i:blinkon10','i:blinkoff10' }
+vim.opt.guicursor = { 'i:ver25','i:blinkwait10','i:blinkon10','i:blinkoff10' }
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -33,8 +33,18 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+vim.opt.spellsuggest = 'best,3'
 
 --vim.opt.colorcolumn = "80"
 vim.opt.swapfile = false
 vim.opt.clipboard="unnamed"
 vim.opt.autoread = true
+
+-- Auto-enable spell check for specific filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "markdown", "md" },
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = { "en_au" }
+  end,
+})

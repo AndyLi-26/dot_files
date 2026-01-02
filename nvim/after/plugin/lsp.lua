@@ -13,32 +13,84 @@ lsp.ensure_installed({
 lsp.nvim_workspace()
 
 local cmp = require('cmp')
-require'lspconfig'.eslint.setup{}
+--require'lspconfig'.eslint.setup{}
+
+--require('lspconfig')['ts_ls'].setup {
+--  capabilities = capabilities,
+--}
+
+vim.lsp.config("eslint", {})
+
+vim.lsp.config("ts_ls", {
+  capabilities = capabilities,
+})
+
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('lspconfig')['ts_ls'].setup {
-  capabilities = capabilities,
-}
-
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<Tab>'] = cmp.config.disable,
+  --['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<Enter>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
+  --['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<Tab>'] = cmp.config.disable,
+  ['<C-Space>'] = cmp.config.disable,
+  ['<C-n>'] = cmp.config.disable,
+  ['<C-Tab>'] = cmp.config.disable,
+  --["<C-Space>"] = cmp.mapping.complete(),
 })
 
+--local spell_source = {}
+--
+--spell_source.new = function()
+--  return setmetatable({}, { __index = spell_source })
+--end
+--
+--spell_source.complete = function(self, params, callback)
+--  local ft = vim.bo.filetype
+--  if ft ~= "tex" and ft ~= "markdown" and ft ~= "md" then
+--    callback({ items = {}, isIncomplete = false })
+--    return
+--  end
+--
+--  local word = vim.fn.expand("<cword>")
+--  local suggestions = vim.fn.spellsuggest(word)
+--  local items = {}
+--  for _, s in ipairs(suggestions) do
+--    table.insert(items, { label = s })
+--  end
+--  callback({ items = items, isIncomplete = false })
+--end
+--
+--spell_source.get_trigger_characters = function()
+--  return { "" }
+--end
+--
+--cmp.register_source("spell", spell_source.new())
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
   sources = {
-    { name = 'nvim_lsp', keyword_length = 1 },
-    { name = 'buffer', keyword_length = 1 },
-    { name = 'path', keyword_length = 1 },
-    { name = 'luasnip', keyword_length = 3 },
+      { name = 'spell', keyword_length = 3, max_item_count = 3,
+      option = {
+          keep_all_entries = false,
+          enable_in_context = function()
+              return true
+          end,
+          preselect_correct_word = true,
+      },
+      },
+      { name = 'nvim_lsp', keyword_length = 1 },
+      { name = 'buffer', keyword_length = 3, max_item_count = 3 },
+      { name = 'path', keyword_length = 1 },
+      { name = "dictionary", keyword_length = 5, max_item_count = 3},
+  --{ name = 'luasnip', keyword_length = 3 },
   }
+})
+
+require("cmp_dictionary").setup({
+    paths = { "/usr/share/dict/words" },
+    exact_length = 5,
 })
 
 lsp.set_preferences({

@@ -1,3 +1,6 @@
+vim.g.deprecation_warnings = false
+
+
 require('theprimeagen.packer')
 require("theprimeagen.set")
 require("theprimeagen.remap")

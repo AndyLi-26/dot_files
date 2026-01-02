@@ -12,6 +12,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+vim.keymap.set("n", "<leader>q", ":qall<CR>", { noremap = true, silent = true })
+
 vim.keymap.set("n", "<leader>vwm", function()
     require("vim-with-me").StartVimWithMe()
 end)
@@ -54,7 +56,15 @@ vim.keymap.set("n","<C-k>",":<C-U>TmuxNavigateUp<CR>")
 vim.keymap.set("n","<C-l>",":<C-U>TmuxNavigateRight<CR>")
 vim.keymap.set("n","<C-p>",":<C-U>TmuxNavigatePrevious<CR>")
 
+-- LanguageTool
+--vim.keymap.set("n", "<leader>lt", ":LanguageToolCheck<CR>", { desc = "LanguageTool check" })
+--vim.keymap.set("n", "<leader>lc", ":LanguageToolClear<CR>", { desc = "Clear LanguageTool highlights" })
+vim.keymap.set('n', '<leader>lt', function()
+  vim.opt.spell = not vim.opt.spell:get()
+  print("Spell checking: " .. (vim.opt.spell:get() and "ON" or "OFF"))
+end, { desc = "Toggle spell checking" })
 
+vim.keymap.set('n', '<leader>lc', "z=")
 --vim.keymap.set("n", "<C-h>", "<C-b>h")
 --vim.keymap.set("n", "<C-j>", "<C-b>j")
 --vim.keymap.set("n", "<C-k>", "<C-b>k")

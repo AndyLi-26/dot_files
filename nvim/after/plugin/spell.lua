@@ -1,0 +1,34 @@
+-- LanguageTool configuration
+--vim.g.languagetool_cmd = "/opt/homebrew/bin/languagetool"
+--vim.g.languagetool_server = "http://localhost:8081"
+--vim.g.languagetool_lang = "en-AU"   -- change if needed
+--vim.g.languagetool_disable_rules =  "WHITESPACE_RULE,EN_QUOTES"
+--
+--vim.api.nvim_create_autocmd("FileType", {
+--  pattern = { "markdown", "tex" },
+--  callback = function()
+--    vim.opt_local.spell = true
+--    vim.opt_local.spelllang = "en_au"
+--  end,
+--})
+--
+--local cmp = require("cmp")
+--
+--cmp.setup({
+--  sources = {
+--    { name = "spell" },
+--    { name = "buffer" },
+--  },
+--})
+--
+--vim.api.nvim_create_autocmd("FileType", {
+--  pattern = { "markdown", "tex" },
+--  callback = function()
+--    require("cmp").setup.buffer({
+--      sources = {
+--        { name = "spell" },
+--        { name = "buffer" },
+--      },
+--    })
+--  end,
+--})
